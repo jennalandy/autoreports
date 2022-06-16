@@ -1,6 +1,13 @@
 # This package contains the skeleton structure to create automated reports of any kind.
 
-# Steps
+## Use Cases
+
+- Recreate the same report with different data files: have the path to a data file as a parameter
+- Recreate the same report for different queries of data: have the string SQL query as a parameter
+- Update reports as new data comes in: have the data location and date ranges considered as a parameter
+- Recreate the same report for different outcomes of interest: have the response variable as a parameter
+
+## How To
 
 1.  Copy this repository: either fork or download
 
@@ -25,3 +32,7 @@ run_report(
   output_format = 'pdf_document'
 )
 ```
+
+## Result
+
+The `run_report` function results in a complete report as a `.Rmd` and knitted file in the specified format.
