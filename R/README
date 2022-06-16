@@ -1,4 +1,0 @@
-Instructions to update report:
-- Update `report.Rmd`, where code can be run during development
-- When satisfied, copy the entirity of `report.Rmd` into the quoted are of `write_Rmd.R`. DO NOT UNINDENT THIS. The indent level should match `report.Rmd` exactly.
-- Edit any variable in the YAML section to be taken as input, using C-style formatting https://www.gastonsanchez.com/r4strings/c-style-formatting.html
