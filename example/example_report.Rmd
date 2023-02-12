@@ -1,0 +1,81 @@
+---
+title: "Example Report"
+output: pdf_document
+date: "`r Sys.Date()`"
+params:
+  iris_file_path: './iris.csv'
+  subset_logical: FALSE
+  n_subset: 10
+  save_subset_file_path: './iris_subset.csv'
+  titlecase_logical: TRUE
+  plot_theme: 'ggplot2::theme_bw()'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(stringr)
+library(ggplot2)
+```
+
+```{r}
+validate_params(
+  parameters = params,
+  types = list(
+    'iris_file_path' ='character',
+    'subset_logical' = 'logical',
+    'n_subset' = 'double',
+    'save_subset_file_path' = 'character',
+    'titlecase_logical' = 'logical',
+    'plot_theme' = 'character'
+  ),
+  input_files = c('iris_file_path'),
+  output_files = c('save_subset_file_path'),
+  overwrite = c('save_subset_file_path')
+)
+
+print(params)
+```
+
+
+# Load the data from provided file path
+
+```{r}
+data <- read.csv(params$iris_file_path)
+```
+
+# Optional preprocessing depending on parameters
+
+```{r}
+if (params$titlecase_logical) {
+  data$Species <- as.factor(stringr::str_to_title(data$Species))
+}
+
+if (params$subset_logical) {
+  data <- data[
+    sample(1:nrow(data), size = params$n_subset),
+  ]
+}
+```
+
+# Plot with desired theme
+
+```{r}
+ggplot(data, aes(
+  x = Sepal.Length,
+  y = Petal.Length,
+  color = Species
+)) +
+  geom_point() +
+  ggtitle(paste("Plotting n =", nrow(data), "Irises")) +
+  eval(parse(text = params$plot_theme))
+```
+
+
+
+
+
+
+
