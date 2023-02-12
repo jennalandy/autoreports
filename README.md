@@ -16,6 +16,7 @@
     - Create a new Rmd or update `example/example_report.Rmd` to your liking, accessing parameters with `params$name` as demonstrated in the example report.
     - Consider utilizing the `validate_params` function provided in this package to check that parameter types are correct, that input files exist, and that output files won't be overwritten unless explicitly stated.
     - I would strongly recommend including `print(params)` somewhere in your notebook so you always know what version of the report you are looking at.
+    - To pass functions or expressions as parameters, include them as character parameters, and evaluate in the Rmd with `eval(parse(text = params$expression))`. See the last line of `example.example.Rmd` for an example using this method when the ggplot theme is passed as a parameter.
 
 3.  Knitting reports: Use the `rmarkdown::render` function as demonstrated in `example/example.R` (single example below):
 ```
